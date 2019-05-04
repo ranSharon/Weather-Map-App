@@ -1,13 +1,9 @@
 'use strict';
 
-const CITES = []; // array that hold all cites' objects (classes)
+// array that hold all cites' objects (classes)
+const CITES = [];
 
 let mymap = L.map('mapid').setView([0, 0], 2);
-
-// setting map from maptiler.com
-// L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=DvprAg688KVdZ6kwctnm', {
-//     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>',
-// }).addTo(mymap);
 
 // setting map from mapbox.com
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFuc2hhcm9uIiwiYSI6ImNqdWxoeHJtczIwazM0MW9hMGk1ZGR0dTMifQ.0pag0fm6gJELcd_i0SvR2g', {
@@ -66,10 +62,10 @@ class City {
     }
 }
 
-// immediate function invocation
-// initializing CITES array and setting all markers on the map for the first time
+// Immediately Invoked Function Expressions
+// initializing 'CITES' array and setting all markers on the map for the first time
 (function () {
-    const citesNamesAndCoordinates = {
+    const citesCoordinates = {
         'london': [51.5, -0.13],
         'paris': [48.86, 2.35],
         'jerusalem': [31.78, 35.23],
@@ -79,7 +75,7 @@ class City {
         'san francisco': [37.78, -122.42],
         'barcelona': [41.38, 2.18]
     };
-    for (let city in citesNamesAndCoordinates) {
+    for (let city in citesCoordinates) {
         CITES.push(new City(
             city,
             '',
@@ -88,19 +84,18 @@ class City {
             '',
             '',
             '',
-            '', 0,
-            L.marker(citesNamesAndCoordinates[city], {icon: blueIcon}).addTo(mymap)
+            '',
+            0,
+            L.marker(citesCoordinates[city], {icon: blueIcon}).addTo(mymap)
         ));
     }
 
-    // attaching all markers to click event listener
+    // attaching all cites' markers to click event listener
     CITES.forEach(city => {
         city.marker.on('click', () => {
-            //city.onClickMarker(e);
             city.onClickMarker();
         });
     });
-    console.log(CITES);
 }());
 
 document.getElementById('selectCity').addEventListener('change', () => {
@@ -127,7 +122,6 @@ const setCityWeatherAndLocationData = (cityName) => {
         city.renderCityData();
         city.setMapViewForCity();
         city.setCityMarkerColor(redIcon);
-        console.log('no fetching');
     } else {
         city.lastFetchTime = currTime;
         fetchingCityData(city);
@@ -150,7 +144,6 @@ const fetchingCityData = (city) => {
             city.renderCityData();
             city.setMapViewForCity();
             city.setCityMarkerColor(redIcon);
-            console.log('fetching');
         });
 };
 

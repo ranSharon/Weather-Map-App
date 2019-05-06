@@ -39,18 +39,11 @@ class City {
         this.marker = marker;
     }
 
-    renderCityData() {
+    renderCityWeatherData() {
         document.getElementById('description').innerHTML = `description: ${this.description}`;
         document.getElementById('wind').innerHTML = `wind: speed ${this.windSpeed}, ${this.windDeg} degrees`;
         document.getElementById('temperature').innerHTML = `temperature: ${this.temperature}`;
         document.getElementById('humidity').innerHTML = `humidity: ${this.humidity}%`;
-    }
-
-    onClickMarker() {
-        document.getElementById('selectCity').value = this.cityName;
-        setCityWeatherAndLocationData(this.cityName);
-        setAllMarkersIconToBlue();
-        this.setCityMarkerColor(redIcon);
     }
 
     setMapViewForCity() {
@@ -59,6 +52,13 @@ class City {
 
     setCityMarkerColor(icon) {
         this.marker.setIcon(icon);
+    }
+
+    onClickCityMarker() {
+        document.getElementById('selectCity').value = this.cityName;
+        updateDisplayByCity(this.cityName);
+        setAllMarkersIconToBlue();
+        this.setCityMarkerColor(redIcon);
     }
 }
 
@@ -93,7 +93,7 @@ class City {
     // attaching all cites' markers to click event listener
     CITES.forEach(city => {
         city.marker.on('click', () => {
-            city.onClickMarker();
+            city.onClickCityMarker();
         });
     });
 }());
@@ -108,27 +108,26 @@ document.getElementById('selectCity').addEventListener('change', () => {
         document.getElementById('temperature').innerHTML = `temperature:`;
         document.getElementById('humidity').innerHTML = `humidity:`;
         setAllMarkersIconToBlue();
-        return;
+    } else {
+        updateDisplayByCity(cityName);
     }
-
-    setCityWeatherAndLocationData(cityName);
 });
 
-const setCityWeatherAndLocationData = (cityName) => {
+const updateDisplayByCity = (cityName) => {
     const currTime = Date.now();
     const city = getCityObjectFromCitesArray(cityName);
 
     if (lastFetchWasLessThanFiveMinutesAgo(currTime, city.lastFetchTime)) {
-        city.renderCityData();
+        city.renderCityWeatherData();
         city.setMapViewForCity();
         city.setCityMarkerColor(redIcon);
     } else {
         city.lastFetchTime = currTime;
-        fetchingCityData(city);
+        fetchingAndSettingCityData(city);
     }
 };
 
-const fetchingCityData = (city) => {
+const fetchingAndSettingCityData = (city) => {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city.cityName}&APPID=d51355a645edb7601e6e4de469eec8a4`)
         .then(function (response) {
             return response.json();
@@ -141,7 +140,9 @@ const fetchingCityData = (city) => {
             city.humidity = myJson.main.humidity;
             city.lon = parseFloat(myJson.coord.lon);
             city.lat = parseFloat(myJson.coord.lat);
-            city.renderCityData();
+
+            // update display for current city
+            city.renderCityWeatherData();
             city.setMapViewForCity();
             city.setCityMarkerColor(redIcon);
         });
@@ -170,6 +171,6 @@ const convertKelvinToCelsius = (kelvin) => {
 
 const setAllMarkersIconToBlue = () => {
     CITES.forEach(city => {
-        city.marker.setIcon(blueIcon);
+        city.setCityMarkerColor(blueIcon);
     });
 };

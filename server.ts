@@ -1,7 +1,7 @@
 'use strict';
-import {createServer} from 'http';
-import {parse} from 'url';
-import {readFile} from 'fs';
+import * as http from 'http';
+import * as url from 'url';
+import * as fs from 'fs';
 
 const contentTypes = new Map();
 contentTypes.set('html', 'text/html');
@@ -10,8 +10,8 @@ contentTypes.set('css', 'text/css');
 contentTypes.set('json', 'application/json');
 contentTypes.set('png', 'image/png');
 
-createServer(function (req, res) {
-    const reqUrl = parse(req.url);
+http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse) {
+    const reqUrl: url.Url = url.parse(req.url);
     let ext: string = reqUrl.pathname.split('.')[1];
     let fileName: string = reqUrl.pathname.substr(1);
 
@@ -21,7 +21,7 @@ createServer(function (req, res) {
     }
 
     const cType: string = contentTypes.get(ext);
-    readFile(fileName, function (err, data) {
+    fs.readFile(fileName, function (err: NodeJS.ErrnoException | null, data: string | Buffer) {
         if (err) {
             if (err.code === 'ENOENT') {
                 res.writeHead(404, {'Content-Type': 'text/plain'});

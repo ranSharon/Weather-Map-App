@@ -3,6 +3,7 @@
 <head>
     <title>WeatherMapApp</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./node_modules/leaflet/dist/leaflet.css">
@@ -14,36 +15,34 @@
         <h3>Weather Map App</h3>
     </li>
 </ul>
-<div class="main">
-    <div class="w-25 mr-2">
-        <div class="cityData">
-            <div class="card">
-                <div class="card-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="selectCity">Select City:</label>
-                        </div>
-                        <select class="custom-select" id="selectCity">
-                            <option selected>world</option>
-                            <option value="london">london</option>
-                            <option value="paris">paris</option>
-                            <option value="jerusalem">jerusalem</option>
-                            <option value="cancun">cancun</option>
-                            <option value="miami">miami</option>
-                            <option value="new york">new york</option>
-                            <option value="san francisco">san francisco</option>
-                            <option value="barcelona">barcelona</option>
-                        </select>
+<div class="row main">
+    <div class="col-md-3 mb-2 city-data ">
+        <div class="card">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="selectCity">Select City:</label>
                     </div>
-                    <div class="mb-3" id="description">description:</div>
-                    <div class="mb-3" id="wind">wind:</div>
-                    <div class="mb-3" id="temperature">temperature:</div>
-                    <div class="mb-3" id="humidity">humidity:</div>
+                    <select class="custom-select" id="selectCity">
+                        <option selected>world</option>
+                        <option value="london">london</option>
+                        <option value="paris">paris</option>
+                        <option value="jerusalem">jerusalem</option>
+                        <option value="cancun">cancun</option>
+                        <option value="miami">miami</option>
+                        <option value="new york">new york</option>
+                        <option value="san francisco">san francisco</option>
+                        <option value="barcelona">barcelona</option>
+                    </select>
                 </div>
+                <div class="mb-3" id="description">description:</div>
+                <div class="mb-3" id="wind">wind:</div>
+                <div class="mb-3" id="temperature">temperature:</div>
+                <div class="mb-3" id="humidity">humidity:</div>
             </div>
         </div>
     </div>
-    <div class="map w-75">
+    <div class="col-md-9 map">
         <div id="mapid"></div>
     </div>
 </div>

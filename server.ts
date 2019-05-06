@@ -36,6 +36,6 @@ http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse)
         }
         res.end();
     });
-}).listen(8080, function () {
+}).listen(8080 || process.env.PORT , function () {
     console.log('Client is available at http://localhost:8080');
 });

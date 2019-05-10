@@ -15,4 +15,4 @@
 ```bash
     npm start
  ```   
-* open your browser at the address https://localhost:8080
+* open your browser at the address http://localhost:8080

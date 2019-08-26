@@ -1,4 +1,4 @@
-See live demo at: https://floating-wave-97457.herokuapp.com/
+See live demo at: https://weather-map-app-by-ran.herokuapp.com
 # Weather-Map-App
 * clone this repository
 ```bash

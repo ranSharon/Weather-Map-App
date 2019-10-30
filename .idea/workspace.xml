@@ -33,6 +33,9 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectId" id="1Py5BijqE60HSVYbhgVtkuhpFDc" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -124,7 +127,9 @@
       <workItem from="1557113877444" duration="108000" />
       <workItem from="1557267732905" duration="1052000" />
       <workItem from="1557480741358" duration="261000" />
-      <workItem from="1566833368871" duration="106000" />
+      <workItem from="1566833368871" duration="596000" />
+      <workItem from="1566895004342" duration="37000" />
+      <workItem from="1572456583245" duration="90000" />
     </task>
     <servers />
   </component>
@@ -145,7 +150,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

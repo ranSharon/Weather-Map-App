@@ -1,5 +1,14 @@
 See live demo at: https://weather-map-app-by-ran.herokuapp.com
-# Weather-Map-App
+# WeatherMapApp
+Project made from scratch using Vanilla JS
+
+**This project uses the Open Weather Map API**
+
+**This project uses the leaflet map Library**
+
+In this project you can select several cities around the world and get Weather and location details in Real-Time.
+
+# Usage
 * clone this repository
 ```bash
     git clone https://github.com/ranSharon/Weather-Map-App.git
